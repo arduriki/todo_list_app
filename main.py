@@ -1,5 +1,3 @@
-todos = []
-
 while True:
     # .strip()
     # if the user adds a whitespace in the command
@@ -8,9 +6,25 @@ while True:
 
     match user_action:
         case "add":
-            todo = input("Enter a todo: ")
+            todo = input("Enter a todo: ") + "\n"
+            # To read what's inside the .txt file
+            file = open("todos.txt", "r")
+            # Create a list from the file
+            # usually we won't create a list per se...
+            todos = file.readlines()
+            # Always close when you're done
+            file.close()
             todos.append(todo)
+            # Store todos in a file, in write mode
+            file = open("todos.txt", "w")
+            file.writelines(todos)
+            file.close()
         case "show":
+            # Read the file
+            file = open("todos.txt", "r")
+            todos = file.readlines()
+            file.close()
+            # Go through the file
             for index, item in enumerate(todos):
                 print(f"{index + 1}-{item}")
         case "edit":
