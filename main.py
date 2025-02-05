@@ -24,9 +24,23 @@ while True:
             file = open("todos.txt", "r")
             todos = file.readlines()
             file.close()
+
+            # Delete the '\n' from the list
+            # Method 1 - Using a 'for-loop'
+            # new_todos = []
+            # for todo in todos:
+            #     new_todo = todo.strip("\n")
+            #     new_todos.append(new_todo)
+
+            # Method 2 - Using FP
+            # new_todos = [todo.strip("\n") for todo in todos]
+
+            # Method 3
             # Go through the file
             for index, item in enumerate(todos):
-                print(f"{index + 1}-{item}")
+                item = item.strip("\n")
+                row = f"{index + 1}-{item}"
+                print(row)
         case "edit":
             number = int(input("Number of the todo to edit: ")) - 1
             new_todo = input("Enter new todo: ")
